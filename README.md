@@ -1,2 +1,17 @@
-# project_jaar1
-Rank a Film (or something else)
+# Project jaar 1
+
+
+## Installation
+
+
+
+## Running the code!
+
+
+## Example requests
+
+
+
+## Useful commands
+
+|
