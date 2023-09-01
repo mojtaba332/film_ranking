@@ -1,11 +1,18 @@
 # importeer de benodigde packages
+# voor nu zijn er een 3-tal werkende request: 
+# http://127.0.0.1:5000 - tekst: De server draait in ieder geval naar behoren!
+# http://127.0.0.1:5000/init - creeer en vul db
+# http://127.0.0.1:5000/films - geft een lijst fims
+
+
 import sqlite3
 from os import mkdir
 from flask import Flask, jsonify
 from flask_cors import CORS
+from queries import *
 
 DB_FOLDER = 'data'
-DB_LOCATION = DB_FOLDER + '/films.db'
+DB_LOCATION = DB_FOLDER + 'films.db'
 
 app = Flask(__name__)
 
@@ -51,7 +58,7 @@ def get_films():
     conn.row_factory = sqlite3.Row
     c = conn.cursor()
     # Haal de lijst met films op uit de database
-    c.execute('SELECT * FROM films')
+    c.execute(get_all_films())
     films = [dict(row) for row in c.fetchall()]
     conn.close()
 
