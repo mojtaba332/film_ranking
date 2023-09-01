@@ -11,7 +11,7 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 from queries import *
 
-DB_FOLDER = 'data'
+DB_FOLDER = 'data/'
 DB_LOCATION = DB_FOLDER + 'films.db'
 
 app = Flask(__name__)
