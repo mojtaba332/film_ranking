@@ -17,7 +17,7 @@ DB_LOCATION = DB_FOLDER + 'films.db'
 app = Flask(__name__)
 
 def get_conn() -> sqlite3.connect:
-    # Maak verbinding met de SQLite-database
+    # Create connection with SQLite-database
     try:
         conn = sqlite3.connect(DB_LOCATION, check_same_thread=False)
     except sqlite3.OperationalError:
@@ -27,27 +27,25 @@ def get_conn() -> sqlite3.connect:
     return conn
 
 def close_conn(connection):
-# Maak verbinding met de SQLite-database
     connection.close() 
-
 
 @app.route('/init', methods=["GET"])
 def init_db():
     conn = get_conn()
     c = conn.cursor()
-    # Maak de tabel 'films' aan als deze nog niet bestaat
-    c.execute('''
-        CREATE TABLE IF NOT EXISTS films (
-            id INTEGER PRIMARY KEY,
-            title TEXT,
-            rank INTEGER
-        )
-    ''')
 
-    # Voeg wat voorbeeldfilms toe aan de database
-    c.execute("INSERT INTO films (title, rank) VALUES ('The Shawshank Redemption', 9.3)")
-    c.execute("INSERT INTO films (title, rank) VALUES ('The Godfather', 9.2)")
-    c.execute("INSERT INTO films (title, rank) VALUES ('The Godfather: Part II', 9.0)")
+    # remove tables
+    c.execute(drop_film())
+    c.execute(drop_ranking())
+    c.execute(drop_ranked_by())
+    # create tables
+    c.execute(create_table_film())
+    c.execute(create_table_ranking_user())
+    c.execute(create_table_ranking())
+    # Insert dummy data
+    c.execute(get_dummy_films())
+    c.execute(get_dummy_ranking_users())
+    c.execute(get_dummy_rankings())
     conn.commit()
     close_conn(conn)
     return jsonify({'success':True}), 200, {'ContentType':'application/json'}
