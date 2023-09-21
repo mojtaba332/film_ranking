@@ -2,66 +2,71 @@
 # voor nu zijn er een 3-tal werkende request: 
 # http://127.0.0.1:5000 - tekst: De server draait in ieder geval naar behoren!
 # http://127.0.0.1:5000/init - creeer en vul db
-# http://127.0.0.1:5000/films - geft een lijst fims
+# http://127.0.0.1:5000/films - geft een lijst films
+# http://127.0.0.1:5000/film/1 - geeft de film met id 1
 
 
-import sqlite3
-from os import mkdir
-from flask import Flask, jsonify
+from flask import Flask, request
 from flask_cors import CORS
-from queries import *
-
-DB_FOLDER = 'data/'
-DB_LOCATION = DB_FOLDER + 'films.db'
+from db_actions import *
 
 app = Flask(__name__)
 
-def get_conn() -> sqlite3.connect:
-    # Create connection with SQLite-database
-    try:
-        conn = sqlite3.connect(DB_LOCATION, check_same_thread=False)
-    except sqlite3.OperationalError:
-        mkdir(DB_FOLDER)
-    finally:
-        conn = sqlite3.connect(DB_LOCATION, check_same_thread=False)
-    return conn
-
-def close_conn(connection):
-    connection.close() 
-
 @app.route('/init', methods=["GET"])
 def init_db():
-    conn = get_conn()
-    c = conn.cursor()
-
-    # remove tables
-    c.execute(drop_film())
-    c.execute(drop_ranking())
-    c.execute(drop_ranked_by())
-    # create tables
-    c.execute(create_table_film())
-    c.execute(create_table_ranking_user())
-    c.execute(create_table_ranking())
-    # Insert dummy data
-    c.execute(get_dummy_films())
-    c.execute(get_dummy_ranking_users())
-    c.execute(get_dummy_rankings())
-    conn.commit()
-    close_conn(conn)
-    return jsonify({'success':True}), 200, {'ContentType':'application/json'}
+    return init_database()
 
 @app.route('/films', methods=["GET"])
 def get_films():
-    conn = get_conn()
-    conn.row_factory = sqlite3.Row
-    c = conn.cursor()
-    # Haal de lijst met films op uit de database
-    c.execute(get_all_films())
-    films = [dict(row) for row in c.fetchall()]
-    conn.close()
+    return get_all_films()
 
-    # Zet de lijst met films om naar JSON-formaat en geef deze terug als antwoord
-    return jsonify(films)
+@app.route('/film/<film_id>', methods=["GET"])
+def get_film(film_id):
+    return get_one_film(film_id)
+
+@app.route('/film/delete/<film_id>', methods=["DELETE"])
+def delete_film(film_id):
+    return delete_one_film(film_id)
+
+@app.route('/film/create', methods=["POST"])
+def create_film():
+    # get data from post request
+    data = request.get_json(force=True)
+    try:
+        resp = insert_film(data)
+    except ValueError as e:
+        resp = jsonify(str(e))
+        resp.status_code = 400
+
+    # en geef response terug
+    return resp
+
+@app.route('/ranking/rank', methods=["POST"])
+def ranking_rank_film():
+    # get data from post request
+    data = request.get_json(force=True)
+    try:
+        resp = rank_film(data)
+    except ValueError as e:
+        resp = jsonify(str(e))
+        resp.status_code = 400
+
+    # en geef response terug
+    return resp
+
+@app.route('/user/create', methods=["POST"])
+def create_user():
+    # get data from post request
+    data = request.get_json(force=True)
+    try:
+        resp = insert_ranking_user(data)
+    except ValueError as e:
+        resp = jsonify(str(e))
+        resp.status_code = 400
+
+    # en geef response terug
+    return resp
+
 
 @app.route('/', methods=["GET"])
 def index():

@@ -1,14 +1,27 @@
 # deze functies geven een sql string terug.
 
 # functie: query alle films
-def get_all_films():
+def query_all_films():
     return "select * from film;"
 
 # functie: query 1 film o.b.v. id
-def get_one_film(id):
+def query_one_film(id):
     return f"select * from film where id = {id};"
 
+def query_delete_film(id):
+    return f"delete from film where id = {id}"
 
+def query_insert_film(title, description):
+    return f'''insert into film (title, description) 
+                VALUES ("{title}", "{description}")'''
+
+def query_insert_ranking_user(first_name, last_name):
+    return f'''insert into ranking_user (first_name, last_name) 
+                VALUES ("{first_name}", "{last_name}")'''
+
+def query_insert_ranking(film_id, rank, ranked_by):
+    return f'''insert into ranking (film_id, rank, ranked_by) 
+                VALUES ("{film_id}", "{rank}", "{ranked_by}")'''
 
 # From here on you find the inserts, creates and delete etc.
 # Please do not change
