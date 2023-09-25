@@ -28,7 +28,7 @@ def get_film(film_id):
 def delete_film(film_id):
     return delete_one_film(film_id)
 
-@app.route('/film/create', methods=["POST"])
+@app.route('/film/create', methods=["PUT"])
 def create_film():
     # get data from post request
     data = request.get_json(force=True)
@@ -41,7 +41,7 @@ def create_film():
     # en geef response terug
     return resp
 
-@app.route('/ranking/rank', methods=["POST"])
+@app.route('/ranking/rank', methods=["PUT"])
 def ranking_rank_film():
     # get data from post request
     data = request.get_json(force=True)
@@ -54,7 +54,7 @@ def ranking_rank_film():
     # en geef response terug
     return resp
 
-@app.route('/user/create', methods=["POST"])
+@app.route('/user/create', methods=["PUT"])
 def create_user():
     # get data from post request
     data = request.get_json(force=True)
