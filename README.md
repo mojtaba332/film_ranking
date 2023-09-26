@@ -17,7 +17,7 @@ Your client is accessed through [http://localhost](http://localhost) (unless you
 Your server is accessed through [http://localhost:5000](http://localhost:5000) (unless you changed ports in the .env.docker file)
 
 ## Important!
-For docker to work you need to have enabled Virtualization in your BIOS (Windows users only). Find out how to do that [here](http://localhost:5000)
+For docker to work you need to have enabled Virtualization in your BIOS (Windows users only). Find out how to do that [here](https://bce.berkeley.edu/enabling-virtualization-in-your-pc-bios.html)
 
 This installation uses the following ports for it's services. these ports cannot be used by any other program. If you are experiencing troubles setting this up, you should check if these ports are unused. 
 
