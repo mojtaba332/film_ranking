@@ -41,4 +41,5 @@ Make sure to run these commands in the folder where you cloned this repo!!!
 
 ## Example requests
 | Route | Endpoint | Description |
+|---|---|---|
 | | |
