@@ -2,16 +2,43 @@
 
 
 ## Installation
+- Make sure you have docker AND docker compose installed (easiest way to do this is to install docker desktop - [Download Docker Desktop](https://www.docker.com/products/docker-desktop) )
+- Use a code editor (for example: Visual Studio Code) to open the file .env.docker file (this is a hidden file - enable "view hidden files" in your file explorer) and edit the variable lines like "SERVER_ROOT_FOLDER" AND "CLIENT_ROOT_FOLDER" to represent where you made your GIT repositories for the client and the server. Make sure both folders exist and use the full path on your device (make sure there are quotes around the path). In this file you can also change ports for the services. 
+- Run the following command in the folder where your docker-compose.yml file is located: `docker compose --env-file=.env.docker up -d`
+- Let the process finish setting up your environment
+- Start coding!
+-- your client is available on localhost (if you changed the variable "CLIENT_PORT_HTTP" make sure you put this after localhost - localhost:YOUR_PORT)
+
+## Services
+- Python flask server - python_server
+- Nginx Webserver - client
+
+Your client is accessed through [http://localhost](http://localhost) (unless you changed ports in the .env.docker file)
+Your server is accessed through [http://localhost:5000](http://localhost:5000) (unless you changed ports in the .env.docker file)
+
+## Important!
+For docker to work you need to have enabled Virtualization in your BIOS (Windows users only). Find out how to do that [here](http://localhost:5000)
+
+This installation uses the following ports for it's services. these ports cannot be used by any other program. If you are experiencing troubles setting this up, you should check if these ports are unused. 
+
+| Portnumber | used by? |
+|---|---|
+| 80 | Nginx (HTTP) |
+| 443 | Nginx (HTTPS) |
+| 5000 | Python/Flask |
 
 
+## Useful commands for setting up or managing your docker environment
+Make sure to run these commands in the folder where you cloned this repo!!!
 
-## Running the code!
+|  Title | Description  | When to run?  |  Command |
+|---|---|---|---|
+| Up Command  | Run this command to pull & setup and run/start the containers/services/networks mentioned in the docker-compose.yml. | Run this when you want to start using this environment (you need to have docker & docker compose installed - install docker desktop for the easiest setup. | docker compose --env-file=.env.docker up -d |
+| Down command | Stops and removes the containers started with the "up" command (previous command). | Run this when you want to stop using the containers and services (your data will be persisted still) OR when you want to setup a new/different environment. | docker compose --env-file=.env.docker down |
+| Cleanup command | Removes stopped containers, unused networks, dangling images, and dangling build cache. && also removes all images not used by a container. | Run this when you have recently used a down command and you want to prevent docker from using stored cache to build new images. | docker image prune -a |
+| Attach command | Attaches your current terminal to a container running in docker. This allows you to run commands in the container. | Run this when you want to run commands in a container. For example composer commands in the php container, node commands in the node container or mysqlcommands in the mysql container. {container_name} Should be changed to the name of the container you are trying to run the command in. 'sh' means shell command, you can also use 'bash' to use bash (bash might not work in all containers) | docker exec -it {container_name} sh |
 
 
 ## Example requests
-
-
-
-## Useful commands
-
-|
+| Route | Endpoint | Description |
+| | |
