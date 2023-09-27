@@ -1,3 +1,18 @@
 body {
   background-color: red;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+section {
+  display:none;
+}
+
+.active {
+  display:block;
+}
+
+#filmsList, #filmsList th, #filmsList td{
+  border: 1px solid black;
+  padding: 3px;
+  border-collapse: collapse;
 }
