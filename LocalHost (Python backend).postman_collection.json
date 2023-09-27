@@ -1,0 +1,85 @@
+{
+	"info": {
+		"_postman_id": "6bd1579e-a938-4eca-8971-99d5cde802be",
+		"name": "LocalHost (Python backend)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "30028377"
+	},
+	"item": [
+		{
+			"name": "Check if running",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://127.0.0.1:5000"
+			},
+			"response": []
+		},
+		{
+			"name": "get all films",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://127.0.0.1:5000/films"
+			},
+			"response": []
+		},
+		{
+			"name": "Get 1 film",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://127.0.0.1:5000/film/5"
+			},
+			"response": []
+		},
+		{
+			"name": "Insert film",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\": \"The little mermaid\", \"description\": \"Film over zeemermin\"}"
+				},
+				"url": "http://127.0.0.1:5000/film/create"
+			},
+			"response": []
+		},
+		{
+			"name": "Insert User",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"first_name\": \"Jan\", \"last_name\": \"de Tester\"}"
+				},
+				"url": "http://127.0.0.1:5000/user/create"
+			},
+			"response": []
+		},
+		{
+			"name": "Insert ranking",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"film_id\": 5, \"rank\": 8, \"ranked_by\": 12 }"
+				},
+				"url": "http://127.0.0.1:5000/ranking/rank"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete film",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://127.0.0.1:5000/film/delete/4"
+			},
+			"response": []
+		}
+	]
+}
