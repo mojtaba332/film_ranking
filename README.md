@@ -3,7 +3,8 @@
 
 ## Installation
 - Make sure you have docker AND docker compose installed (easiest way to do this is to install docker desktop - [Download Docker Desktop](https://www.docker.com/products/docker-desktop) )
-- Use a code editor (for example: Visual Studio Code) to open the file .env.docker file (this is a hidden file - enable "view hidden files" in your file explorer) and edit the variable lines like "SERVER_ROOT_FOLDER" AND "CLIENT_ROOT_FOLDER" to represent where you made your GIT repositories for the client and the server. Make sure both folders exist and use the full path on your device (make sure there are quotes around the path). In this file you can also change ports for the services. 
+- The docker directory of the installation contains the file: example.env.docker. Rename this file to .env.docker.
+- Open .env.docker and edit the variable lines like "SERVER_ROOT_FOLDER" and "CLIENT_ROOT_FOLDER" to represent where you made your GIT repositories for the client and the server. Make sure both folders exist and use the full path on your device (make sure there are quotes around the path). In this file you can also change ports for the services.
 - Start Docker Desktop app (if not already running!)
 - Run the following command in the folder where your docker-compose.yml file is located: `docker compose --env-file=.env.docker up -d`
 - Let the process finish setting up your environment
