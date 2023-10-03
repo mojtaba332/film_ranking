@@ -107,6 +107,7 @@ def init_database():
     c.execute(drop_film())
     c.execute(drop_ranking())
     c.execute(drop_ranked_by())
+    c.execute(drop_ranking_users())
     conn.commit()
     # create tables
     c.execute(create_table_film())

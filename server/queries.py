@@ -35,6 +35,9 @@ def drop_ranking():
 def drop_ranked_by():
     return 'DROP TABLE IF EXISTS ranked_by'
 
+def drop_ranking_users():
+    return 'DROP TABLE IF EXISTS ranking_user'
+
 def create_table_film():
     return '''
         CREATE TABLE IF NOT EXISTS film (
