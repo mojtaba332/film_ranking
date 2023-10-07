@@ -42,6 +42,15 @@ Make sure to run these commands in the folder where you cloned this repo!!!
 
 
 ## Example requests
-| Route | Endpoint | Description |
-|---|---|---|
-| | |
+More info and example requests: use Postman and import collection file from repo.
+
+| Method | Endpoint | Description       |
+|--------|--|-------------------|
+| GET    | /init | (re)set database  |
+| GET    | /films | get all films     |
+| GET    | /film/<film_id> | get film by id    |
+| DELETE | /film/delete/<film_id> | delete film by id |
+| PUT    | /film/create | create film       |
+| PUT    | /ranking/rank | create ranking |
+| PUT    | /user/create | create user      |
+
