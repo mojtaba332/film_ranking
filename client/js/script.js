@@ -1,7 +1,5 @@
 
 function displayFilms(films){
-     // Sorteer de films op basis van hun titel
-    films.sort((a, b) => b.title < a.title);
     // Maak een lijstitem voor elke film en voeg deze toe aan de lijst       
     let container = document.querySelector('#filmsList tbody');
     container.innerHTML = '';
@@ -12,9 +10,7 @@ function displayFilms(films){
     }
 }
 
-function displayFilmsRanked(films){
-    // Sorteer de films op basis van hun ranking
-   films.sort((a, b) => b.rank - a.rank);
+function displayFilmsRanking(films){
    // Maak een lijstitem voor elke film en voeg deze toe aan de lijst       
    let container = document.getElementById('rankingList');
    container.innerHTML = '';
@@ -25,9 +21,9 @@ function displayFilmsRanked(films){
    }
 }
 
-function getAndDisplayFilms(displayFilms) {
+function getAndDisplayFilms(endPoint, displayFilms) {
     // Haal de lijst met films op van de backend API
-    fetch('http://localhost:5000/films')
+    fetch('http://localhost:5000/' + endPoint)
         .then(response => response.json())
         .then(films => {
             displayFilms(films);
@@ -43,13 +39,13 @@ function activateSection(section){
 function clickedHome(event){
     if (sectionHome.classList.contains('active')) return;
     activateSection(sectionHome);
-    getAndDisplayFilms(displayFilmsRanked);
+    getAndDisplayFilms('films/ranking/5',displayFilmsRanking);
 }
 
 function clickedFilms(event){
     if (sectionFilms.classList.contains('active')) return;
     activateSection(sectionFilms);
-    getAndDisplayFilms(displayFilms);
+    getAndDisplayFilms('films',displayFilms);
 }
 
 

@@ -20,6 +20,10 @@ def init_db():
 def get_films():
     return get_all_films()
 
+@app.route('/films/ranking/<limit>', methods=["GET"])
+def get_ranking(limit):
+    return get_films_ranking(limit)
+
 @app.route('/film/<film_id>', methods=["GET"])
 def get_film(film_id):
     return get_one_film(film_id)

@@ -32,6 +32,18 @@ def get_all_films():
     # Zet de lijst met films om naar JSON-formaat en geef deze terug als antwoord
     return jsonify(films)
 
+def get_films_ranking(limit):
+    conn = get_conn()
+    conn.row_factory = sqlite3.Row
+    c = conn.cursor()
+    # Haal de lijst met films op uit de database
+    c.execute(query_films_ranked_higher(limit))
+    films = [dict(row) for row in c.fetchall()]
+    conn.close()
+
+    # Zet de lijst met films om naar JSON-formaat en geef deze terug als antwoord
+    return jsonify(films)
+
 def get_one_film(film_id: int):
     conn = get_conn()
     conn.row_factory = sqlite3.Row
