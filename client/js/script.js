@@ -1,3 +1,4 @@
+const SERVER_PORT = ':5000';
 
 function displayFilms(films){
     // Maak een lijstitem voor elke film en voeg deze toe aan de lijst       
@@ -23,7 +24,7 @@ function displayFilmsRanking(films){
 
 function getAndDisplayFilms(endPoint, displayFilms) {
     // Haal de lijst met films op van de backend API
-    fetch('http://localhost:5000/' + endPoint)
+    fetch(`http://localhost${SERVER_PORT}/${endPoint}`)
         .then(response => response.json())
         .then(films => {
             displayFilms(films);
