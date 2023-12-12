@@ -11,12 +11,12 @@ def query_all_films():
 def query_films_ranked_higher(limit):
     return f'''
         SELECT film.id as id, film.title as title, 
-               ROUND(AVG(ranking.rank), 1) as average_rank
-        FROM film
-        LEFT JOIN ranking ON film.id = ranking.film_id
-        GROUP BY film.id, film.title
-        ORDER BY average_rank DESC
-        LIMIT {limit};
+               round(avg(ranking.rank), 1) as average_rank
+        from film
+        left join ranking ON film.id = ranking.film_id
+        group by film.id, film.title
+        order by average_rank DESC
+        limit {limit};
     '''
 
 # functie: query 1 film o.b.v. id
