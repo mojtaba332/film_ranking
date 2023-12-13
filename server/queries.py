@@ -4,16 +4,17 @@
 def query_all_films():
     return "select * from film;"
 
-# functie: query films met een rang hoger dan rank
+#functie: query films met een rang hoger dan rank
 # def query_films_ranked_higher(limit):
-#     return f"select film.id as id, film.title as title, (select round(max(rank),1) from ranking where ranking.film_id = film.id) as rank from film order by rank asc limit 3;"
-# functie: query films met een rang hoger dan rank
+#     return f"select film.id as id, film.title as title, (select round(max(rank),1) from ranking where ranking.film_id = film.id) as rank from film order by rank asc limit{limit};"
+#functie: query films met een rang hoger dan rank
+
 def query_films_ranked_higher(limit):
     return f'''
         SELECT film.id as id, film.title as title, 
-               round(avg(ranking.rank), 1) as average_rank
-        from film
-        left join ranking ON film.id = ranking.film_id
+               ROUND(AVG(ranking.rank), 1) as average_rank
+        FROM film
+        LEFT JOIN ranking ON film.id = ranking.film_id
         group by film.id, film.title
         order by average_rank DESC
         limit {limit};
